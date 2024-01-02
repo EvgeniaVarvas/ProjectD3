@@ -9,5 +9,29 @@ Products
 <!-- В контенте на странице мы выводим все товары -->
 {% block content %}
 <h1>Все товары</h1>
-{{ products }}
+<h3>{{ time_now|date:'d.m.Y'}}</h3>
+<hr>
+{% if products %}
+    <table>
+        <tr>
+            <td>Название</td>
+            <td>Описание</td>
+            <td>Категория</td>
+            <td>Цена</td>
+            <td>В наличии</td>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.name}}</td>
+            <td>{{ product.description | truncatechars:50}}</td>
+            <td>{{ product.category.name}}</td>
+            <td>{{ product.price}}</td>
+            <td>{{ product.quantity}}</td>
+        </tr>
+        {% endfor %}    
+    </table>        
+    
+{% else %}    
+    <h2>Товаров нет</h2>
+{% endif%}    
 {% endblock content %}
