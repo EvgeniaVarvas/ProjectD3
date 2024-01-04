@@ -3,6 +3,7 @@
 from datetime import datetime
 from django.db import models
 from django.core.validators import MinValueValidator
+from django.urls import reverse
 
 
 # Товар для нашей витрины 
@@ -27,13 +28,13 @@ class Product(models.Model):
 
 
     def __str__(self):
-        return f'{self.name.title()}: {self.description[:20]}'
+        return f'{self.name.title()} {self.description} {self.price} {self.quantity}'
 
 
 # Категория, к которой будет привязываться товар
 class Category(models.Model):
     # названия категорий тоже не должны повторяться
-    name = models.CharField(max_length=100, unique=True) 
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name.title()
