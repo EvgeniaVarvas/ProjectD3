@@ -1,5 +1,5 @@
 from django_filters import FilterSet, ModelChoiceFilter
-from .models import Product, Category
+from .models import Category
 
 class ProductFilter(FilterSet):
     category = ModelChoiceFilter(
@@ -7,14 +7,17 @@ class ProductFilter(FilterSet):
         field_name='category',
         to_field_name='name',
         label='Категория',
+        empty_label='Все категории',
     )
 
-    class Meta:
-        model = Product
-        fields = ['category']
-    class Meta:
-        model = Product
-        fields = ['category__name']
+    # class Meta:
+    #     model = Product
+    #     fields = ['category']
+
+    
+    # class Meta:
+    #     model = Product
+    #     fields = ['category__name']
 # class ProductFilter(FilterSet):
 #     category = ModelChoiceFilter(
 #         field_name='category__name',

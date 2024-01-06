@@ -9,21 +9,7 @@ Products
  
 <!-- В контенте на странице мы выводим все товары -->
 {% block content %}
-<h1>Все товары</h1>
-
-<!-- <form action="" method="get" >
-    {{ filterset.form.non_field_errors }}
-
-    {{ filterset.form.name__icontains.errors }}
-    <label for="{{ filterset.form.name__icontains.id_for_label }}">Search</label>
-    <input
-        id="{{ filterset.form.name__icontains.id }}"
-        name="{{ filterset.form.name__icontains.name }}"
-        value="{{ filterset.form.name__icontains.value }}"
-        class="form-control"
-    >
-    <input type="submit" class="mt-3 btn-primary" value="Найти" />
-</form> -->
+<h1>Доступные Товары</h1>
 
 <form action="" method="get">
     {{ filterset.form.non_field_errors }}
@@ -52,10 +38,10 @@ Products
         <tr>
             <td>{{ product.name}}</td>
             <!-- <td>{{ product.description|truncatechars:50 }}</td> -->
-            <td>{{ product.description|truncatechars:50 }}</td>
+            <td>{{ product.description|truncatechars:20 }}</td>
             <td><a href="{% url 'product_detail' pk=product.pk %}">Смотреть описание</a></td>
             <td>{{ product.category.name}}</td>
-            <td>{{ product.price|currency:'usd'}}</td>
+            <td>{{ product.price|currency:'rub'}}</td>
             <td>{{ product.quantity}}</td>
         </tr>
         {% endfor %}    
