@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .forms import ProductForm
 from .filters import ProductFilter
 from .models import Product
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class ProductsList(ListView):
     # Указываем модель, объекты которой мы будем выводить
@@ -72,17 +72,18 @@ class ProductDetail(DetailView):
         
 #     return render(request, 'create.html', {'form': form})
 
-class ProductCreate(CreateView):
+class ProductCreate(LoginRequiredMixin ,CreateView):
     model = Product
+    raise_exception = True
     template_name = 'create.html'
     form_class = ProductForm
-    context_object_name = 'create' 
+    context_object_name = 'create'
 
 # Добавляем представление для изменения товара.
 class ProductUpdate(UpdateView):
     form_class = ProductForm
     model = Product
-    template_name = 'create.html'    
+    template_name = 'create.html'
 
 class ProductDelete(DeleteView):
     model = Product

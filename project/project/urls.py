@@ -20,10 +20,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
     path('about/', include('django.contrib.flatpages.urls')),
     path('products/', include('simpleapp.urls')),
-
-    # Делаем так, чтобы все адреса из нашего приложения (simpleapp/urls.py)
-   # подключались к главному приложению с префиксом products/
+    path('accounts/', include('accounts.urls')),
     
 ]
