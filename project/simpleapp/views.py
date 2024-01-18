@@ -4,7 +4,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .forms import ProductForm
 from .filters import ProductFilter
 from .models import Product
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+
 
 class ProductsList(ListView):
     # Указываем модель, объекты которой мы будем выводить
@@ -72,20 +73,28 @@ class ProductDetail(DetailView):
         
 #     return render(request, 'create.html', {'form': form})
 
-class ProductCreate(LoginRequiredMixin ,CreateView):
+class ProductCreate(PermissionRequiredMixin ,CreateView):
     model = Product
+    permission_required = ('simpleapp.add_product',)
     raise_exception = True
     template_name = 'create.html'
     form_class = ProductForm
     context_object_name = 'create'
 
 # Добавляем представление для изменения товара.
-class ProductUpdate(UpdateView):
+class ProductUpdate(PermissionRequiredMixin, UpdateView):
+    permission_required = ('simpleapp.change_product',)
     form_class = ProductForm
     model = Product
     template_name = 'create.html'
 
-class ProductDelete(DeleteView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product'] = self.get_object()
+        return context
+
+class ProductDelete(PermissionRequiredMixin, DeleteView):
     model = Product
+    permission_required = ('simpleapp.delete_product',)
     template_name = 'product_delete.html'
     success_url = reverse_lazy('products_list')

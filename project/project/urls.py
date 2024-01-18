@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.urls import path, reverse_lazy
+from django.views.generic import RedirectView
 
 
 urlpatterns = [
@@ -24,5 +26,6 @@ urlpatterns = [
     path('about/', include('django.contrib.flatpages.urls')),
     path('products/', include('simpleapp.urls')),
     path('accounts/', include('accounts.urls')),
+    path('', RedirectView.as_view(url=reverse_lazy('account_signup'), permanent=False)),
     
 ]
