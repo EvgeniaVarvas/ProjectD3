@@ -156,3 +156,14 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 ACCOUNT_FORMS = {"signup": "accounts.forms.CustomSignupForm"}
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'EMAIL_HOST'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'EMAIL_HOST_USER'
+EMAIL_HOST_PASSWORD = 'EMAIL_HOST_PASSWORD'
+EMAIL_USE_SSL = True
+EMAIL_USE_TSL = False
+
+DEFAULT_FROM_EMAIL = 'example.com'
+
